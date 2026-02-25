@@ -11,6 +11,5 @@ class Animal:
     
         
 
-ob=Animal(" gato ")
-obj=Animal(" pantera ")
-obj.
+
+

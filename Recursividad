@@ -1,0 +1,47 @@
+
+sistema = {
+    "nombre": "root",
+    "archivos": ["readme.txt"],
+    "carpetas": [
+        {
+            "nombre": "docs",
+            "archivos": ["tarea.pdf", "guia.docx"],
+            "carpetas": []
+        },
+        {
+            "nombre": "imagenes",
+            "archivos": ["foto.png"],
+            "carpetas": [
+                {
+                    "nombre": "vacaciones",
+                    "archivos": ["playa.jpg"],
+                    "carpetas": []
+                }
+            ]
+        }
+    ]
+}
+
+def buscar_archivo(carpeta, nombre_archivo):
+
+    
+    if nombre_archivo in carpeta["archivos"]:
+        print(f"Archivo encontrado en la carpeta: {carpeta['nombre']}")
+        return True
+
+
+    for subcarpeta in carpeta["carpetas"]:
+        encontrado = buscar_archivo(subcarpeta, nombre_archivo)
+        if encontrado:
+            return True
+        
+    return False
+
+
+
+archivo_a_buscar = "playa.jpg"
+
+if buscar_archivo(sistema, archivo_a_buscar):
+    print(f" El archivo '{archivo_a_buscar}' existe en el sistema.")
+else:
+    print(f" El archivo '{archivo_a_buscar}' NO existe en el sistema.")

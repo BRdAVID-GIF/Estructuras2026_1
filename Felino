@@ -1,0 +1,13 @@
+from Animal import Animal 
+
+class Felino(Animal):
+    def __init__(self, nombre, Especie):
+        super().__init__(nombre)
+        self.Especie=Especie
+
+
+def setEspecie (self, Especie):
+    self.Especie=Especie
+
+def getEspecie (self):
+    return self.Especie
