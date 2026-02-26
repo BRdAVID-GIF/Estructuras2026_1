@@ -1,0 +1,55 @@
+class Nodo:
+    def __init__(self, dato):
+        self.dato = dato
+        self.siguiente = None
+        self.anterior = None
+
+
+class Lista:
+    def __init__(self):
+        self.cabeza = None
+        self.cola = None
+
+    def adicionar(self, dato):
+        nuevo = Nodo(dato)
+        if self.cabeza is None:
+            self.cabeza = nuevo
+            self.cola = nuevo
+        else:
+            self.cola.siguiente = nuevo
+            nuevo.anterior = self.cola
+            self.cola = nuevo
+
+    def buscar(self, dato):
+        actual = self.cabeza
+        while actual:
+            if actual.dato == dato:
+                print(f"El dato {dato} SÍ está en la lista")
+                return True
+            actual = actual.siguiente
+
+        print(f"El dato {dato} NO está en la lista")
+        return False
+
+    def mostrarAdelante(self):
+        actual = self.cabeza
+        while actual:
+            print(actual.dato)
+            actual = actual.siguiente
+
+    def mostrarAtras(self):
+        actual = self.cola
+        while actual:
+            print(actual.dato)
+            actual = actual.anterior
+
+
+# Prueba
+listado = Lista()
+listado.adicionar(24)
+listado.adicionar(11)
+listado.adicionar(2)
+listado.adicionar(9)
+
+listado.buscar(2)
+listado.buscar(100)
