@@ -1,0 +1,74 @@
+
+rutas = ["Ruta 1", "Ruta 2", "Ruta 3", "Ruta 4"]
+indice_ruta = 0
+
+inventario = 10
+pedidos = []
+
+def mostrar_menu():
+    print("\n--- SISTEMA DE PEDIDOS Y DISTRIBUCIÓN ---")
+    print("1. Crear pedido")
+    print("2. Ver pedidos")
+    print("3. Procesar pedidos")
+    print("4. Salir")
+
+while True:
+    mostrar_menu()
+    opcion = input("Seleccione una opción: ")
+
+    if opcion == "1":
+        if inventario <= 0:
+            print(" No hay inventario disponible")
+            continue
+
+        nombre = input("Nombre del cliente: ")
+        pedido = {
+            "cliente": nombre,
+            "pago": False,
+            "estado": "Pendiente"
+        }
+
+        confirmar = input("¿Pago confirmado? (si/no): ").lower()
+        if confirmar == "si":
+            pedido["pago"] = True
+            
+
+        pedidos.append(pedido)
+        print(" Pedido registrado")
+
+    elif opcion == "2":
+        print("\n--- LISTA DE PEDIDOS ---")
+        if not pedidos:
+            print("No hay pedidos")
+        for i, p in enumerate(pedidos):
+            print(f"{i+1}. Cliente: {p['cliente']} | Estado: {p['estado']} | Pago: {p['pago']}")
+
+    elif opcion == "3":
+        for p in pedidos:
+            if p["estado"] == "Pendiente" and p["pago"]:
+
+                print(f"\nProcesando pedido de {p['cliente']}")
+
+                
+                ruta_actual = rutas[indice_ruta]
+                print(f" Asignando {ruta_actual}")
+
+                indice_ruta = (indice_ruta + 1) % len(rutas)
+
+                print("Cargando pedido...")
+                print("Distribuyendo...")
+
+                for ruta in rutas:
+                    print(f"Pasando por {ruta}")
+
+                inventario -= 1
+                p["estado"] = "Enviado"
+
+        print("✔ Procesamiento terminado")
+
+    elif opcion == "4":
+        print("Sistema finalizado")
+        break
+
+    else:
+        print(" Opción inválida")

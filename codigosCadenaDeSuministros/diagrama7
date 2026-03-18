@@ -1,0 +1,55 @@
+pedidos = []
+
+def menu():
+    print("\n--- SISTEMA DE ENTREGA ---")
+    print("1. Registrar pedido")
+    print("2. Ver pedidos")
+    print("3. Procesar entrega")
+    print("4. Salir")
+
+while True:
+    menu()
+    opcion = input("Seleccione una opción: ")
+
+    if opcion == "1":
+        cliente = input("Nombre del cliente: ")
+        pedidos.append({
+            "cliente": cliente,
+            "estado": "En preparación",
+            "intentos": 0
+        })
+        print(" Pedido registrado")
+
+    elif opcion == "2":
+        print("\n--- LISTA DE PEDIDOS ---")
+        if not pedidos:
+            print("No hay pedidos")
+        for i, p in enumerate(pedidos):
+            print(f"{i+1}. {p['cliente']} | Estado: {p['estado']} | Intentos: {p['intentos']}")
+
+    elif opcion == "3":
+        for p in pedidos:
+            if p["estado"] != "Entregado":
+
+                print(f"\nProcesando entrega de {p['cliente']}")
+                print("Preparando...")
+                print("Enviando...")
+
+                respuesta = input("¿Entrega exitosa? (si/no): ").lower()
+
+                if respuesta == "si":
+                    p["estado"] = "Entregado"
+                    print(" Entrega completada")
+                else:
+                    p["intentos"] += 1
+                    p["estado"] = "Reintento"
+                    print("⚠ Se reintentará la entrega")
+
+        print("✔ Proceso de entregas finalizado")
+
+    elif opcion == "4":
+        print("Sistema finalizado")
+        break
+
+    else:
+        print(" Opción inválida")
